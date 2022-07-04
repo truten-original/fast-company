@@ -5,19 +5,17 @@ const Users = () => {
   const renderList = (users) => {
     return users.map((user) => {
       return (
-        <tr>
+        <tr key={user["_id"]}>
           <td>{user.name}</td>
           <td>
             {user.qualities.map((quality) => {
               return (
-                <td>
-                  <span
-                    id={quality.id}
-                    className={`badge  bg-${quality.color}`}
-                  >
-                    {quality.name}
-                  </span>
-                </td>
+                <span
+                  key={quality["_id"]}
+                  className={`badge  bg-${quality.color}`}
+                >
+                  {quality.name}
+                </span>
               )
             })}
           </td>
