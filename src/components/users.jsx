@@ -13,6 +13,7 @@ const Users = () => {
                 <span
                   key={quality["_id"]}
                   className={`badge  bg-${quality.color}`}
+                  style={{ marginLeft: "4px" }}
                 >
                   {quality.name}
                 </span>
