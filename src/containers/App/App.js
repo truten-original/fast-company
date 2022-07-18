@@ -1,4 +1,4 @@
-import UsersList from "../UsersList/UserList"
+import UsersList from "../UsersList/UsersList"
 const App = () => {
   return (
     <>
