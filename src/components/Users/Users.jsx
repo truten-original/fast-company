@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import User from "../User/User"
 const Users = ({ users, handleDelete }) => {
   return (
@@ -11,5 +12,8 @@ const Users = ({ users, handleDelete }) => {
     </>
   )
 }
-
+Users.propTypes = {
+  users: PropTypes.array,
+  handleDelete: PropTypes.func,
+}
 export default Users

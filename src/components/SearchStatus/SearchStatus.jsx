@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 const SearchStatus = ({ users, renderPhrase }) => {
   return (
     <>
@@ -15,5 +16,8 @@ const SearchStatus = ({ users, renderPhrase }) => {
     </>
   )
 }
-
+SearchStatus.propTypes = {
+  users: PropTypes.array,
+  renderPhrase: PropTypes.func,
+}
 export default SearchStatus
