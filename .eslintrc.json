@@ -1,34 +1,32 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "standard",
+    "plugin:react/jsx-runtime"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:react/jsx-runtime",
-        "plugin:react-hooks/recommended",
-        "plugin:import/recommended",
-        "prettier"
-        
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "no-unused-vars": [
+      "warn",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "react/jsx-filename-extension": [1, { "extensions":[".js", ".jsx" ]}],
-        "react/function-component-definition": [
-            2,
-            {
-              "namedComponents": "function-declaration",
-            },
-          ],
-    }
+    
+        "quotes": [2, "double", { "avoidEscape": true }],
+        "space-before-function-paren": ["error", {
+          "anonymous": "never",
+          "named": "never",
+          "asyncArrow": "never"
+      }]
+        }
 }

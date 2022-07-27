@@ -1,9 +1,9 @@
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 const Qualities = ({ user }) => {
   return (
     <>
       {user.qualities.map((qual) => (
-        <span className={"badge m-1 bg-" + qual.color} key={qual._id}>
+        <span className={'badge m-1 bg-' + qual.color} key={qual._id}>
           {qual.name}
         </span>
       ))}
@@ -11,6 +11,6 @@ const Qualities = ({ user }) => {
   )
 }
 Qualities.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.object
 }
 export default Qualities

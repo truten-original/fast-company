@@ -1,19 +1,18 @@
-import PropTypes from "prop-types"
-import User from "../User/User"
+import PropTypes from 'prop-types'
+import User from '../User/User'
+
 const Users = ({ users, handleDelete }) => {
   return (
-    <>
-      <tbody>
-        {users &&
-          users.map((user) => (
-            <User user={user} handleDelete={handleDelete} key={user._id} />
-          ))}
-      </tbody>
-    </>
+    <tbody>
+      {users &&
+        users.map((user) => {
+          return <User user={user} handleDelete={handleDelete} key={user._id} />
+        })}
+    </tbody>
   )
 }
 Users.propTypes = {
   users: PropTypes.array,
-  handleDelete: PropTypes.func,
+  handleDelete: PropTypes.func
 }
 export default Users

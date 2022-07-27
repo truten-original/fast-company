@@ -6,7 +6,7 @@ const Pagination = ({
   countItemsOnPage,
   currentPage,
   handleDecrementPage,
-  handleIncrementPage,
+  handleIncrementPage
 }) => {
   const pageCount = Math.ceil(countItems / countItemsOnPage)
   const pages = _.range(1, pageCount + 1)
@@ -60,6 +60,6 @@ Pagination.propTypes = {
   handleIncrementPage: PropTypes.func,
   countItems: PropTypes.number,
   currentPage: PropTypes.number,
-  countItemsOnPage: PropTypes.number,
+  countItemsOnPage: PropTypes.number
 }
 export default Pagination

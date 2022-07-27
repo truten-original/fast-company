@@ -1,5 +1,3 @@
 {
-    "recommendations": [
-        "MS-CEINTL.vscode-language-pack-ru"
-    ]
+  "recommendations": ["MS-CEINTL.vscode-language-pack-ru"]
 }

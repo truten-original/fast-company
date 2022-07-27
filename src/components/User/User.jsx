@@ -1,7 +1,7 @@
-import PropTypes from "prop-types"
-import { propTypes } from "react-bootstrap/esm/Image"
-import Qualities from "../Qualities/Qualities"
-import ToogleBookmark from "./iconsSvg/ToogleBookmark/ToogleBookmark"
+import PropTypes from 'prop-types'
+import { propTypes } from 'react-bootstrap/esm/Image'
+import Qualities from '../Qualities/Qualities'
+import ToogleBookmark from './iconsSvg/ToogleBookmark/ToogleBookmark'
 const User = ({ user, handleDelete }) => {
   return (
     <tr>
@@ -28,6 +28,6 @@ const User = ({ user, handleDelete }) => {
 }
 User.propTypes = {
   user: PropTypes.object,
-  handleDelete: PropTypes.func,
+  handleDelete: PropTypes.func
 }
 export default User
