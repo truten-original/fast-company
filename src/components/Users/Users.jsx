@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
-import User from '../User/User'
+import PropTypes from "prop-types"
+import User from "../User/User"
 
 const Users = ({ users, handleDelete }) => {
   return (

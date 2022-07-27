@@ -1,23 +1,24 @@
 import PropTypes from "prop-types"
-const GroupList = ({ items, handleItemClick, selectedItem }) => {
+const GroupList = ({
+  items,
+  handleItemClick,
+  selectedItem,
+  itemKey,
+  itemContent
+}) => {
   return (
     <ul className="list-group">
       {items.length > 0 &&
         items.map((item) => (
           <li
             role="button"
-            onClick={() =>
-              handleItemClick(item[GroupList.defaultProps.itemKey])
-            }
-            key={item[GroupList.defaultProps.itemKey]}
+            onClick={() => handleItemClick(item)}
+            key={item[itemKey]}
             className={
-              "list-group-item" +
-              (selectedItem === item[GroupList.defaultProps.itemKey]
-                ? " active"
-                : "")
+              "list-group-item" + (selectedItem === item ? " active" : "")
             }
           >
-            {item[GroupList.defaultProps.itemContent]}
+            {item[itemContent]}
           </li>
         ))}
     </ul>
@@ -28,8 +29,10 @@ GroupList.defaultProps = {
   itemKey: "_id"
 }
 GroupList.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   handleItemClick: PropTypes.func,
-  selectedItem: PropTypes.string
+  selectedItem: PropTypes.object,
+  itemContent: PropTypes.string,
+  itemKey: PropTypes.string
 }
 export default GroupList

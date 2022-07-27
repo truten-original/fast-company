@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import Bookmark from '../Bookmark/Bookmark'
-import BookmarkFill from '../BookmarkFill/BookmarkFill'
-import classes from './ToogleBookmark.module.css'
+import { useState } from "react"
+import Bookmark from "../Bookmark/Bookmark"
+import BookmarkFill from "../BookmarkFill/BookmarkFill"
+import classes from "./ToogleBookmark.module.css"
 const ToogleBookmark = () => {
   const [favourite, setFavourite] = useState(false)
   const changeFavourite = () => setFavourite(!favourite)
