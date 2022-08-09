@@ -1,23 +1,29 @@
-import { useRef, useState, useEffect } from "react"
+import _ from "lodash"
+import { useEffect, useRef, useState } from "react"
+import Table from "../../components/Table/Table"
 import api from "../../api"
-import Header from "../../components/Header/Header"
+import GroupList from "../../components/GroupList/GroupList"
 import Pagination from "../../components/Pagination/Pagination"
 import SearchStatus from "../../components/SearchStatus/SearchStatus"
-import Users from "../../components/Users/Users"
-import { paginate } from "../../utils/utils"
 import { countItemsOnPage } from "../../constants/constants"
-import GroupList from "../../components/GroupList/GroupList"
+import { paginate } from "../../utils/utils"
 const UsersList = () => {
   const [users, setUsers] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProfession, setSelectedProfession] = useState()
+  const [sort, setSort] = useState({ sortParam: "name", sortDirection: "asc" })
   const [professions, setProfessions] = useState()
   const item = useRef(countItemsOnPage)
   const filteredUsers = selectedProfession
     ? users?.filter((item) => item.profession.name === selectedProfession.name)
     : users
+  const sortedUsers = _.orderBy(
+    filteredUsers,
+    [sort.sortParam],
+    [sort.sortDirection]
+  )
   const countItems = filteredUsers?.length
-  const currentUsers = paginate(filteredUsers, currentPage, countItemsOnPage)
+  const currentUsers = paginate(sortedUsers, currentPage, countItemsOnPage)
   useEffect(() => {
     ;(async() => {
       const users = await api.users.fetchAll()
@@ -37,6 +43,17 @@ const UsersList = () => {
       setCurrentPage((prev) => prev - 1)
     }
   }
+  const handleBookmark = (id) => {
+    setUsers(
+      users.map((user) => {
+        if (user._id === id) {
+          return { ...user, bookmark: !user.bookmark }
+        }
+        return user
+      })
+    )
+    console.log(id)
+  }
 
   const handleChangePage = (pageIndex) => {
     setCurrentPage(pageIndex)
@@ -52,6 +69,9 @@ const UsersList = () => {
   }
   const hadleClearProfessionFilter = () => {
     setSelectedProfession()
+  }
+  const handleSort = (item) => {
+    setSort(item)
   }
   const renderPhrase = (number) => {
     const lastOne = Number(number.toString().slice(-1))
@@ -82,10 +102,13 @@ const UsersList = () => {
         <div className="d-flex align-items-center flex-column">
           <SearchStatus users={filteredUsers} renderPhrase={renderPhrase} />
           {countItems > 0 && (
-            <table className="table">
-              <Header />
-              <Users users={currentUsers} handleDelete={handleDelete} />
-            </table>
+            <Table
+              currentUsers={currentUsers}
+              handleDelete={handleDelete}
+              handleBookmark={handleBookmark}
+              selectedSort={sort}
+              handleSort={handleSort}
+            />
           )}
           <Pagination
             handleIncrementPage={handleIncrementPage}
