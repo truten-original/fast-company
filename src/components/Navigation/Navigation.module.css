@@ -1,0 +1,9 @@
+.nav {
+   width: 200px;
+   display: flex;
+   justify-content: space-around;
+}
+.nav a {
+    text-decoration: none;
+    color: blue;
+}

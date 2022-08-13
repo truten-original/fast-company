@@ -8,7 +8,8 @@ const Table = ({
   handleDelete,
   selectedSort,
   handleSort,
-  handleBookmark
+  handleBookmark,
+  users
 }) => {
   const sortingUnits = {
     name: { name: "имя", path: "name" },
@@ -49,6 +50,7 @@ Table.propTypes = {
   handleDelete: PropTypes.func,
   handleSort: PropTypes.func,
   selectedSort: PropTypes.object,
-  handleBookmark: PropTypes.func
+  handleBookmark: PropTypes.func,
+  users: PropTypes.array
 }
 export default Table

@@ -27,6 +27,7 @@ const UsersList = () => {
   useEffect(() => {
     ;(async() => {
       const users = await api.users.fetchAll()
+      console.log(users)
       const profs = await api.professions.fetchAll()
       setProfessions(profs)
       setUsers(users)
@@ -52,7 +53,6 @@ const UsersList = () => {
         return user
       })
     )
-    console.log(id)
   }
 
   const handleChangePage = (pageIndex) => {
@@ -80,48 +80,52 @@ const UsersList = () => {
     if (lastOne === 1) return "человек тусанет"
     return "человек тусанет"
   }
-
-  return (
-    <div className="d-flex align-items-center">
-      {professions && (
-        <div>
-          <button
-            className="btn btn-secondary btn-sm"
-            onClick={hadleClearProfessionFilter}
-          >
-            все пользователи
-          </button>
-          <GroupList
-            items={professions}
-            handleItemClick={handelSelectProfession}
-            selectedItem={selectedProfession}
-          />
-        </div>
-      )}
-      {users && (
-        <div className="d-flex align-items-center flex-column">
-          <SearchStatus users={filteredUsers} renderPhrase={renderPhrase} />
-          {countItems > 0 && (
-            <Table
-              currentUsers={currentUsers}
-              handleDelete={handleDelete}
-              handleBookmark={handleBookmark}
-              selectedSort={sort}
-              handleSort={handleSort}
+  if (users) {
+    return (
+      <div className="d-flex align-items-center">
+        {professions && (
+          <div>
+            <button
+              className="btn btn-secondary btn-sm"
+              onClick={hadleClearProfessionFilter}
+            >
+              все пользователи
+            </button>
+            <GroupList
+              items={professions}
+              handleItemClick={handelSelectProfession}
+              selectedItem={selectedProfession}
             />
-          )}
-          <Pagination
-            handleIncrementPage={handleIncrementPage}
-            handleDecrementPage={handleDecrementPage}
-            currentPage={currentPage}
-            countItems={countItems}
-            countItemsOnPage={countItemsOnPage}
-            handleChangePage={handleChangePage}
-          />
-        </div>
-      )}
-    </div>
-  )
+          </div>
+        )}
+        {users && (
+          <div className="d-flex align-items-center flex-column">
+            <SearchStatus users={filteredUsers} renderPhrase={renderPhrase} />
+            {countItems > 0 && (
+              <Table
+                currentUsers={currentUsers}
+                handleDelete={handleDelete}
+                handleBookmark={handleBookmark}
+                selectedSort={sort}
+                handleSort={handleSort}
+                users={users}
+              />
+            )}
+            <Pagination
+              handleIncrementPage={handleIncrementPage}
+              handleDecrementPage={handleDecrementPage}
+              currentPage={currentPage}
+              countItems={countItems}
+              countItemsOnPage={countItemsOnPage}
+              handleChangePage={handleChangePage}
+            />
+          </div>
+        )}
+      </div>
+    )
+  } else {
+    return <h1>Loading...</h1>
+  }
 }
 
 export default UsersList

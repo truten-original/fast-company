@@ -1,8 +1,9 @@
 import _ from "lodash"
+import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 const User = ({ user, handleDelete, sortingUnits }) => {
   const renderUnit = (unit, user) => {
-    if (sortingUnits[`${unit}`].component) {
+    if (sortingUnits[unit].component) {
       if (typeof sortingUnits[unit].component === "function") {
         return sortingUnits[unit].component(user)
       } else {
@@ -16,7 +17,15 @@ const User = ({ user, handleDelete, sortingUnits }) => {
         )
       }
     } else {
-      return _.get(user, _.get(sortingUnits, `${unit}.path`))
+      if (sortingUnits[unit].path === "name") {
+        return (
+          <Link to={`/users/${user._id}`}>
+            {_.get(user, _.get(sortingUnits, `${unit}.path`))}
+          </Link>
+        )
+      } else {
+        return _.get(user, _.get(sortingUnits, `${unit}.path`))
+      }
     }
   }
   return (
