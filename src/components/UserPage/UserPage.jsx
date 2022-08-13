@@ -22,7 +22,7 @@ const UserPage = () => {
       </div>
     )
   } else {
-    return <div></div>
+    return <h1>Loading...</h1>
   }
 }
 export default UserPage
