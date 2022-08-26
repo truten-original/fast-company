@@ -7,8 +7,10 @@ import Pagination from "../../components/Pagination/Pagination"
 import SearchStatus from "../../components/SearchStatus/SearchStatus"
 import { countItemsOnPage } from "../../constants/constants"
 import { paginate } from "../../utils/utils"
+import MySearch from "../../ui/MySearch"
 const UsersList = () => {
   const [users, setUsers] = useState()
+  const [searchedUsers, setSearchedUsers] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProfession, setSelectedProfession] = useState()
   const [sort, setSort] = useState({ sortParam: "name", sortDirection: "asc" })
@@ -24,10 +26,23 @@ const UsersList = () => {
   )
   const countItems = filteredUsers?.length
   const currentUsers = paginate(sortedUsers, currentPage, countItemsOnPage)
+  const userSearch = (query) => {
+    console.log(query)
+    console.log(query.length)
+    if (query.length !== 0) {
+      setSearchedUsers(
+        users.filter((user) =>
+          user.name.toLowerCase().includes(query.toLowerCase())
+        )
+      )
+    } else {
+      setSearchedUsers(null)
+    }
+    setSelectedProfession(null)
+  }
   useEffect(() => {
     ;(async() => {
       const users = await api.users.fetchAll()
-      console.log(users)
       const profs = await api.professions.fetchAll()
       setProfessions(profs)
       setUsers(users)
@@ -66,6 +81,7 @@ const UsersList = () => {
   }
   const handelSelectProfession = (profession) => {
     setSelectedProfession(profession)
+    setSearchedUsers(null)
   }
   const hadleClearProfessionFilter = () => {
     setSelectedProfession()
@@ -80,6 +96,7 @@ const UsersList = () => {
     if (lastOne === 1) return "человек тусанет"
     return "человек тусанет"
   }
+  console.log(searchedUsers)
   if (users) {
     return (
       <div className="d-flex align-items-center">
@@ -102,16 +119,20 @@ const UsersList = () => {
           <div className="d-flex align-items-center flex-column">
             <SearchStatus users={filteredUsers} renderPhrase={renderPhrase} />
             {countItems > 0 && (
-              <Table
-                currentUsers={currentUsers}
-                handleDelete={handleDelete}
-                handleBookmark={handleBookmark}
-                selectedSort={sort}
-                handleSort={handleSort}
-                users={users}
-              />
+              <div>
+                <MySearch userSearch={userSearch} />
+                <Table
+                  currentUsers={searchedUsers || currentUsers}
+                  handleDelete={handleDelete}
+                  handleBookmark={handleBookmark}
+                  selectedSort={sort}
+                  handleSort={handleSort}
+                  users={users}
+                />
+              </div>
             )}
             <Pagination
+              searchedUsers={searchedUsers}
               handleIncrementPage={handleIncrementPage}
               handleDecrementPage={handleDecrementPage}
               currentPage={currentPage}
