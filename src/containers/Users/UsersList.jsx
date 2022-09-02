@@ -1,13 +1,13 @@
 import _ from "lodash"
 import { useEffect, useRef, useState } from "react"
-import Table from "../../components/Table/Table"
+import Table from "../../components/common/table/Table/Table"
 import api from "../../api"
-import GroupList from "../../components/GroupList/GroupList"
-import Pagination from "../../components/Pagination/Pagination"
-import SearchStatus from "../../components/SearchStatus/SearchStatus"
+import GroupList from "../../components/common/GroupList/GroupList"
+import Pagination from "../../components/common/Pagination/Pagination"
+import SearchStatus from "../../components/common/SearchStatus/SearchStatus"
 import { countItemsOnPage } from "../../constants/constants"
 import { paginate } from "../../utils/utils"
-import MySearch from "../../ui/MySearch"
+import MySearch from "../../components/UI/MySearch/MySearch"
 const UsersList = () => {
   const [users, setUsers] = useState()
   const [searchedUsers, setSearchedUsers] = useState()
@@ -27,8 +27,6 @@ const UsersList = () => {
   const countItems = filteredUsers?.length
   const currentUsers = paginate(sortedUsers, currentPage, countItemsOnPage)
   const userSearch = (query) => {
-    console.log(query)
-    console.log(query.length)
     if (query.length !== 0) {
       setSearchedUsers(
         users.filter((user) =>
@@ -96,7 +94,6 @@ const UsersList = () => {
     if (lastOne === 1) return "человек тусанет"
     return "человек тусанет"
   }
-  console.log(searchedUsers)
   if (users) {
     return (
       <div className="d-flex align-items-center">

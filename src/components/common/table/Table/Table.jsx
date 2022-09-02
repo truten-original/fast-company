@@ -1,15 +1,14 @@
-import TableHeader from "../TableHeader/TableHeader"
-import TableBody from "../TableBody/TableBody"
-import ToogleBookmark from "../User/iconsSvg/ToogleBookmark/ToogleBookmark"
 import PropTypes from "prop-types"
-import Qualities from "../Qualities/Qualities"
+import Qualities from "../../../UI/Qualities/Qualities"
+import ToogleBookmark from "../../User/iconsSvg/ToogleBookmark/ToogleBookmark"
+import TableBody from "../TableBody/TableBody"
+import TableHeader from "../TableHeader/TableHeader"
 const Table = ({
   currentUsers,
   handleDelete,
   selectedSort,
   handleSort,
-  handleBookmark,
-  users
+  handleBookmark
 }) => {
   const sortingUnits = {
     name: { name: "имя", path: "name" },

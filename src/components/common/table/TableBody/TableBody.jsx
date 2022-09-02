@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import User from "../User/User"
+import User from "../../User/User"
 
 const TableBody = ({ users, handleDelete, sortingUnits, handleBookmark }) => {
   return (

@@ -24,7 +24,13 @@ export const validator = (data, config) => {
         statusValidate = (!numberRegExp.test(data)) 
         break
       case "isNeedeLength":
-        statusValidate = (data.length === 0) 
+        statusValidate = (data.length < 8) 
+        break
+      case "isChoosed":
+        statusValidate = (data === "") 
+        break
+      case "isReceived":
+        statusValidate = (data === false) 
         break
       default:
         break

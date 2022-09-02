@@ -1,77 +1,60 @@
 import { useEffect, useState } from "react"
-import TextField from "../../components/TextField/TextField"
-import { validator } from "../../utils/validator"
+import LoginForm from "../../components/UI/LoginForm/LoginForm"
+import RegisterForm from "../../components/UI/RegisterForm/RegisterForm"
+import { useParams, useHistory } from "react-router-dom"
 const Login = () => {
-  const [data, setData] = useState({ email: "", password: "" })
-  const [errors, setErrors] = useState({})
-  useEffect(() => {
-    validate()
-  }, [data])
-  const isValid = Object.keys(errors).length === 0
-  const validatorConfig = {
-    email: {
-      isRequired: {
-        message: "поле должно быть заполнено"
-      },
-      isEmail: { message: "введите корректный email" }
-    },
-    password: {
-      isRequired: {
-        message: "поле должно быть заполнено"
-      },
-      isCapital: {
-        message: "пароль должен содержать минимум одну заглавную букву"
-      },
-      isNeedeLength: {
-        message: "длина пароля должна быть минимум 8 символов"
-      },
-      isNumber: {
-        message: "пароль должен содержать минимум одну цифру"
-      }
-    }
-  }
-  const validate = () => {
-    const errors = validator(data, validatorConfig)
-    setErrors(errors)
-    return Object.keys(errors).length !== 0
-  }
+  const [formState, setFormState] = useState("login")
+  const { type } = useParams()
+  const history = useHistory()
 
-  const handleChange = ({ target }) => {
-    setData((prev) => ({ ...prev, [target.name]: target.value }))
+  const toogleHistory = () => {
+    type === "register"
+      ? history.push("/login")
+      : history.push("/login/register")
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // eslint-disable-next-line no-useless-return
-    if (validate()) return
-  }
+  useEffect(() => {
+    if (type === "register") {
+      setFormState(type)
+    } else {
+      setFormState("login")
+    }
+  }, [type])
+
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-4 offset-md-4 p-4 shadow">
-          <h1 className="mb-4">Login</h1>
-          <form type="submit" onSubmit={(e) => handleSubmit(e)}>
-            <TextField
-              name="email"
-              value={data.email}
-              handleChange={handleChange}
-              error={errors.email}
-            />
-            <TextField
-              error={errors.password}
-              type="password"
-              name="password"
-              value={data.password}
-              handleChange={handleChange}
-            />
-            <button
-              selected={false}
-              className="btn btn-primary col-12 mx-auto"
-              type="submit"
-              disabled={!isValid}
-            >
-              submit
-            </button>
-          </form>
+          {formState === "register"
+            ? (
+            <>
+              <h1 className="mb-4">Registration</h1>
+              <RegisterForm />
+              <p>
+                have you account ?{" "}
+                <a
+                  style={{ color: "blue", cursor: "pointer" }}
+                  onClick={toogleHistory}
+                >
+                  Log in!
+                </a>
+              </p>
+            </>
+              )
+            : (
+            <>
+              <h1 className="mb-4">Login</h1>
+              <LoginForm />
+              <p>
+                have not account ?{" "}
+                <a
+                  style={{ color: "blue", cursor: "pointer" }}
+                  onClick={toogleHistory}
+                >
+                  Sign in!
+                </a>
+              </p>
+            </>
+              )}
         </div>
       </div>
     </div>

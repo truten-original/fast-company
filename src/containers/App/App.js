@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-import Navigation from "../../components/Navigation/Navigation"
+import Navigation from "../../components/common/Navigation/Navigation"
 import { routes } from "../../routes/routes"
 const App = () => {
   return (
