@@ -103,7 +103,6 @@ const СhangePage = () => {
       <button className="btn btn-primary" type="submit">
         update
       </button>
-      <button>all users</button>
     </form>
   )
 }
