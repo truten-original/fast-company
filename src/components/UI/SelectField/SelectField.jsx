@@ -13,11 +13,8 @@ const SelectField = ({
     return classes
   }
   const onChange = (e) => {
-    console.log(e.target.value)
-    const currentProfession = options.find(
-      (option) => option._id === e.target.value
-    )
-    handleSelectChange(currentProfession)
+    const currentItem = options.find((option) => option._id === e.target.value)
+    handleSelectChange(currentItem)
   }
   return (
     <div className="mb-4">

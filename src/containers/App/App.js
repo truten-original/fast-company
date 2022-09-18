@@ -5,12 +5,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center"
-        }}
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "center",
+        //   flexDirection: "column",
+        //   alignItems: "center"
+        // }}
+        className="container-md"
       >
         <Navigation />
         <Switch>

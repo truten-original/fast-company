@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { validator } from "../../../utils/validator"
 import CheckBoxField from "../CheckBoxField/CheckBoxField"
 import TextField from "../TextField/TextField"
 import * as yup from "yup"

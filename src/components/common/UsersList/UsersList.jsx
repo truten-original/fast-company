@@ -1,13 +1,13 @@
 import _ from "lodash"
 import { useEffect, useRef, useState } from "react"
-import Table from "../../components/common/table/Table/Table"
-import api from "../../api"
-import GroupList from "../../components/common/GroupList/GroupList"
-import Pagination from "../../components/common/Pagination/Pagination"
-import SearchStatus from "../../components/common/SearchStatus/SearchStatus"
-import { countItemsOnPage } from "../../constants/constants"
-import { paginate } from "../../utils/utils"
-import MySearch from "../../components/UI/MySearch/MySearch"
+import Table from "../../common/table/Table/Table"
+import api from "../../../api"
+import GroupList from "../../common/GroupList/GroupList"
+import Pagination from "../../common/Pagination/Pagination"
+import SearchStatus from "../../common/SearchStatus/SearchStatus"
+import { countItemsOnPage } from "../../../constants/constants"
+import { paginate } from "../../../utils/utils"
+import MySearch from "../../UI/MySearch/MySearch"
 const UsersList = () => {
   const [users, setUsers] = useState()
   const [searchedUsers, setSearchedUsers] = useState()
@@ -39,7 +39,7 @@ const UsersList = () => {
     setSelectedProfession(null)
   }
   useEffect(() => {
-    ;(async() => {
+    ;(async () => {
       const users = await api.users.fetchAll()
       const profs = await api.professions.fetchAll()
       setProfessions(profs)

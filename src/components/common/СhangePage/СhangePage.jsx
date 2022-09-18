@@ -13,9 +13,8 @@ const СhangePage = () => {
   const [defaultOptions, setDefaultOptions] = useState()
   const id = useParams().userId
   const history = useHistory()
-  console.log(history)
   useEffect(() => {
-    ;(async() => {
+    ;(async () => {
       const user = await api.users.getById(id)
       const users = await api.users.fetchAll()
       const qualities = await api.qualities.fetchAll()
@@ -58,53 +57,67 @@ const СhangePage = () => {
     }
     history.replace(`/users/${id}`)
   }
-  return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      {Object.keys(userData).length && (
-        <>
-          <TextField
-            name="name"
-            value={userData.name}
-            handleChange={handleChange}
-          />
-          <TextField
-            value={userData?.email}
-            handleChange={handleChange}
-            name="email"
-          />
-          <SelectField
-            value={userData.profession.name}
-            defaultOptionText={userData.profession.name}
-            label="profession"
-            options={professions}
-            name="profession"
-            handleSelectChange={selectHandleChange}
-          />
-          <RadioField
-            options={[
-              { name: "male", value: "male" },
-              { name: "female", value: "female" },
-              { name: "other", value: "other" }
-            ]}
-            name="sex"
-            onChange={handleChange}
-            value={userData.sex}
-          />
-          {defaultOptions && (
-            <MultiSelectField
-              label="qualities"
-              defaultValue={defaultOptions}
-              handleChange={MultiSelectHandleChange}
-              options={qualities}
-            />
-          )}
-        </>
-      )}
-      <button className="btn btn-primary" type="submit">
-        update
-      </button>
-    </form>
-  )
+  const goBack = () => {
+    history.goBack()
+  }
+  if (Object.keys(userData).length) {
+    return (
+      <>
+        <button className="btn btn-primary" onClick={goBack}>
+          go back
+        </button>
+        <div style={{ maxWidth: "500px", margin: "0 auto" }}>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            {Object.keys(userData).length && (
+              <>
+                <TextField
+                  name="name"
+                  value={userData.name}
+                  handleChange={handleChange}
+                />
+                <TextField
+                  value={userData?.email}
+                  handleChange={handleChange}
+                  name="email"
+                />
+                <SelectField
+                  value={userData.profession.name}
+                  defaultOptionText={userData.profession.name}
+                  label="profession"
+                  options={professions}
+                  name="profession"
+                  handleSelectChange={selectHandleChange}
+                />
+                <RadioField
+                  options={[
+                    { name: "male", value: "male" },
+                    { name: "female", value: "female" },
+                    { name: "other", value: "other" }
+                  ]}
+                  name="sex"
+                  onChange={handleChange}
+                  value={userData.sex}
+                />
+                {defaultOptions && (
+                  <MultiSelectField
+                    label="qualities"
+                    defaultValue={defaultOptions}
+                    handleChange={MultiSelectHandleChange}
+                    options={qualities}
+                  />
+                )}
+              </>
+            )}
+            <button className="btn btn-primary" type="submit">
+              update
+            </button>
+          </form>
+        </div>
+      </>
+    )
+  } else {
+    return <h1>loading...</h1>
+  }
 }
 
 export default СhangePage
