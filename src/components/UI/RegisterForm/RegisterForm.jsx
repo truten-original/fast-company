@@ -19,11 +19,11 @@ const RegisterForm = () => {
   const [qualities, setQualities] = useState()
   const [errors, setErrors] = useState({})
   useEffect(() => {
-    ;(async() => {
+    ;(async () => {
       const professions = await API.professions.fetchAll()
       setProfessions(professions)
     })()
-    ;(async() => {
+    ;(async () => {
       const qualities = await API.qualities.fetchAll()
       setQualities(qualities)
     })()
